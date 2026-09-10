@@ -1,4 +1,5 @@
 
+#pragma once
 #include "Stack.h"
 
 template <class T>
