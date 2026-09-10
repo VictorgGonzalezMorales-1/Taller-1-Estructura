@@ -5,8 +5,6 @@
  */
 
 #include <iostream>
-#include <string>
-#include "Estructuras/Node.h"
 
 using namespace std;
 
