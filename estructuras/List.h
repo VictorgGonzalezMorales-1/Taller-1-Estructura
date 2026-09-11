@@ -13,25 +13,121 @@ private:
 //Metodos
 public:
 
-    List(); //Constructor
+    List(){this-> start = nullptr;} //Constructor
 
     //Getters
-    T getFirst();
-    T getLast();
-    T get(int index);
+    T getFirst() {
+        if (start == nullptr) throw 0;
+        return this->start->getValue();
+    }
+
+    T getLast() {
+        if (start == nullptr) throw 0;
+
+        Node<T>* cursor = this->start;
+
+        while(cursor->getNext() != nullptr) {
+            cursor = cursor->getNext();
+        }
+
+        return cursor->getValue();
+    }
+
+    T get(int index) {
+        if (start == nullptr || index < 0) throw 0;
+
+        int count = 0;
+        Node<T>* cursor = this->start;
+
+        while (cursor!= nullptr && count < index) {
+            cursor = cursor->getNext();
+            count++;
+        }
+
+        if (cursor == nullptr) throw 0;
+
+        return cursor->getValue();
+    }
 
     //Setters
-    void insertFirst(T value);
-    void insertLast(T value);
-    void insert(T value, int index);
+    void insertFirst(T value) {
+        Node<T>* n = new Node<T>(value);
+        n->setNext(this->start);
+        this->start = n;
+    }
+
+    void insertLast(T value) {
+        if (start == nullptr) {
+            this->start = new Node<T>(value);
+            return;
+        }
+
+        Node<T>* cursor = this->start;
+
+        while (cursor->getNext() != nullptr) {
+            cursor = cursor-> getNext();
+        }
+
+        cursor->setNext(new Node<T>(value));
+    }
+
+    void insert(T value, int index) {
+        if (index < 0) throw 0;
+        if (index == 0) {
+            this->insertFirst(value);
+            return;
+        }
+        if (start == nullptr) throw 0;
+
+        Node<T>* cursor = this->start;
+
+        for (int a = 0; a < index-1; a++) {
+            cursor = cursor->getNext();
+            if (cursor == nullptr) throw 0;
+        }
+
+        Node<T>* n = new Node<T>(value);
+        n->setNext(cursor->getNext());
+        cursor->setNext(n);
+    }
 
     //Otros
-    bool isEmpty();
-    void remove(int index);
-    void clear();
+    bool isEmpty() {
+        if (start == nullptr) return true;
+        return false;
+    }
 
-    ~List();
+    void remove(int index) {
+        if (index < 0) throw 0;
+        if (index == 0) {
+            Node<T>* toDelete = this->start;
+            this->start = start->getNext();
+            delete toDelete;
+            return;
+        }
+
+        Node<T>* cursor = this->start;
+
+        for (int a = 0; a < index - 1; a++) {
+            cursor = cursor-> getNext();
+            if (cursor == nullptr) throw 0;
+        }
+
+        Node<T>* toDelete = cursor->getNext();
+
+        if (toDelete == nullptr) throw 0;
+        cursor->setNext(toDelete->getNext());
+        delete toDelete;
+    }
+
+    void clear() {
+        while (this->start != nullptr) {
+            Node<T>* save = this->start->getNext();
+            delete this->start;
+            this->start = save;
+        }
+    }
+
+    ~List() {this->clear();} //Destructor
 
 };
-
-#include "List.cpp"

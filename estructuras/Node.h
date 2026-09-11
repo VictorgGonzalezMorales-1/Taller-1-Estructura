@@ -8,7 +8,7 @@ class Node {
 //Atributos de la clase
 private:
     T value;
-    Node* next;
+    Node<T>* next;
 
 //Métodos
 public:
@@ -27,5 +27,5 @@ public:
     void setValue(T value){this->value = value;}
     void setNext(Node<T>* next){this->next = next;}
 
-    ~Node::(){} //Destructor
+    ~Node(){} //Destructor
 };

@@ -8,7 +8,12 @@
 #include <fstream>
 #include <string>
 
+#include "logica/Sistema.h"
+#include "logica/SistemaImplementado.h"
+
 using namespace std;
+
+Sistema* S = new SistemaImplementado();
 
 //Metodo para leer el archivo
 void read() {
@@ -23,15 +28,13 @@ void read() {
 
     string line; //String para guardar el contenido
 
-    //Bucle para leer la línea e imprimirla
+    //Bucle para leer la línea
     while (getline(archivo,line)) {
-        cout << line << endl;
     }
 
     archivo.close(); //Cerrar el Archivo
 
 }
-
 
 int main() {
     read();

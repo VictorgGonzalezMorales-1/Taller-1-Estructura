@@ -13,16 +13,54 @@ private:
 //Métodos
 public:
 
-    Stack(); //Constructor
+    //Constructor
+    Stack() {
+        this->start = nullptr;
+        this->sizeStack = 0;
+    }
 
-    void push(T value); //Insertar al inicio
-    void pop(); //Retira el elemento superior
-    T peak(); //Mira el elemento de arriba sin alterarlo
-    bool isEmpty(); //Revisa si está vacia
-    int size(); //Entrega el tamaño
+     //Insertar al inicio
+    void push(T value) {
+        Node<T>* n = new Node<T>(value);
+        n->setNext(this->start);
+        this->start = n;
 
-    ~Stack(); //Destructor
+        this->sizeStack++;
+    }
+
+    //Retira el elemento superior
+    void pop() {
+        if (this->start == nullptr) throw 0;
+
+        Node<T>* toDelete = this->start;
+        this->start = toDelete->getNext();
+        delete toDelete;
+        this->sizeStack--;
+    }
+
+    //Mira el elemento de arriba sin alterarlo
+    T top() {
+        if (start == nullptr) throw 0;
+        return this->start->getValue();
+    }
+
+    //Revisa si está vacia
+    bool isEmpty() {
+        if (this->start == nullptr) return true;
+        return false;
+    }
+
+    //Entrega el tamaño
+    int size() {return this->sizeStack;}
+
+    //Destructor
+    ~Stack() {
+        while (this->start != nullptr) {
+            Node<T>* toDelete = this->start;
+            this->start = toDelete->getNext();
+            delete toDelete;
+        }
+        this->sizeStack = 0;
+    }
 
 };
-
-#include "Stack.cpp"
