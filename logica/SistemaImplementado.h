@@ -34,7 +34,7 @@ public:
     void makeHospital() override;
     void atencion(int cant) override;
     void toSector(Paciente* p) override;
-
+    std:: string entregarCola() override;
 
     ~SistemaImplementado() override; //Sistema Implementado
 

@@ -1,5 +1,6 @@
 
 #include "SistemaImplementado.h"
+using namespace std;
 
 //Constructor
 SistemaImplementado:: SistemaImplementado() {
@@ -84,6 +85,21 @@ void SistemaImplementado:: toSector(Paciente* p) {
         }
         index++;
     }
+}
+
+//Metodo para entregar un string con los pacientes de la lista de espera en orden
+std:: string SistemaImplementado:: entregarCola() {
+
+    string t = "";
+
+    for (int a = 1; a < this->colaPacientes->size() + 1 ; a++) {
+        Paciente* p = this->colaPacientes->front();
+        t += to_string(a) + ". " + p->getId() + " - " + p->getNombre() + "\n" ;
+        this->colaPacientes->pop();
+        this->colaPacientes->push(p);
+    }
+
+    return t;
 }
 
 //Destructor

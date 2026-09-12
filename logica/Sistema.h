@@ -12,8 +12,9 @@ public:
     virtual Paciente* makePaciente(std::string line) = 0;
     virtual List<std:: string>* split(std::string line, char separador) = 0;
     virtual void makeHospital() = 0;
-    virtual void atencion(int cant);
-    virtual void toSector(Paciente* p);
+    virtual void atencion(int cant) = 0;
+    virtual void toSector(Paciente* p) = 0;
+    virtual std:: string entregarCola() = 0;
 
     //Destructor Virtual
     virtual ~Sistema() = default;
