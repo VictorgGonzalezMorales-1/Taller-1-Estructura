@@ -9,11 +9,16 @@ class List {
 //Atributos
 private:
     Node<T>* start;
+    int size;
 
 //Metodos
 public:
 
-    List(){this-> start = nullptr;} //Constructor
+    //Constructor
+    List() {
+        this-> start = nullptr;
+        this-> size = 0;
+    }
 
     //Getters
     T getFirst() {
@@ -49,16 +54,20 @@ public:
         return cursor->getValue();
     }
 
+    int getSize() {return this->size;}
+
     //Setters
     void insertFirst(T value) {
         Node<T>* n = new Node<T>(value);
         n->setNext(this->start);
         this->start = n;
+        size++;
     }
 
     void insertLast(T value) {
         if (start == nullptr) {
             this->start = new Node<T>(value);
+            size++;
             return;
         }
 
@@ -69,12 +78,14 @@ public:
         }
 
         cursor->setNext(new Node<T>(value));
+        size++;
     }
 
     void insert(T value, int index) {
         if (index < 0) throw 0;
         if (index == 0) {
             this->insertFirst(value);
+            size++;
             return;
         }
         if (start == nullptr) throw 0;
@@ -89,6 +100,7 @@ public:
         Node<T>* n = new Node<T>(value);
         n->setNext(cursor->getNext());
         cursor->setNext(n);
+        size++;
     }
 
     //Otros
@@ -103,6 +115,7 @@ public:
             Node<T>* toDelete = this->start;
             this->start = start->getNext();
             delete toDelete;
+            size--;
             return;
         }
 
@@ -118,12 +131,14 @@ public:
         if (toDelete == nullptr) throw 0;
         cursor->setNext(toDelete->getNext());
         delete toDelete;
+        size--;
     }
 
     void clear() {
         while (this->start != nullptr) {
             Node<T>* save = this->start->getNext();
             delete this->start;
+            size--;
             this->start = save;
         }
     }

@@ -11,6 +11,9 @@ public:
     //Metodo para crear a los pacientes
     virtual Paciente* makePaciente(std::string line) = 0;
     virtual List<std:: string>* split(std::string line, char separador) = 0;
+    virtual void makeHospital() = 0;
+    virtual void atencion(int cant);
+    virtual void toSector(Paciente* p);
 
     //Destructor Virtual
     virtual ~Sistema() = default;
