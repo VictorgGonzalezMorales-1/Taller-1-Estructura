@@ -4,13 +4,16 @@
 #include <string>
 
 //Constructor
-SistemaImplementado:: SistemaImplementado() {}
+SistemaImplementado:: SistemaImplementado() {
+    this->colaPacientes = new Queue<Paciente*>();
+}
 
 //Metodo para crear Pacientes
 Paciente* SistemaImplementado:: makePaciente(string line) {
     List<string>* list = split(line, ';');
 
     Paciente* paciente = new Paciente(list->get(0), list->get(1), list->get(2), list->get(3));
+    colaPacientes->push(paciente);
     delete list;
 
     return paciente;
@@ -39,5 +42,9 @@ List<std:: string>*  SistemaImplementado:: split(std:: string line, char separad
 
 }
 
+//Destructor
+SistemaImplementado:: ~SistemaImplementado() {
+    colaPacientes->~Queue();
+}
 
 

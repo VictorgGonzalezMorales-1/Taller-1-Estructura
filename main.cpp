@@ -15,7 +15,7 @@ using namespace std;
 
 Sistema* S = new SistemaImplementado();
 
-//Metodo para leer el archivo
+//Metodo para leer el archivo y procesar a los Pacientes
 void read() {
 
     ifstream archivo("../Pacientes.txt"); //Cargar Archivo
@@ -30,6 +30,7 @@ void read() {
 
     //Bucle para leer la línea
     while (getline(archivo,line)) {
+        S->makePaciente(line);
     }
 
     archivo.close(); //Cerrar el Archivo
