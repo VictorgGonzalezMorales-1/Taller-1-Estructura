@@ -142,6 +142,29 @@ std:: string SistemaImplementado:: informacionSector(int pos) {
     return t;
 }
 
+//Metodo para entregar a todos los pacientes del historial
+string SistemaImplementado:: informacionHistorial() {
+    Stack<Paciente*>* original = this->pilaPacientes;
+    Stack<Paciente*>* copia = new Stack<Paciente*>();
+    string t = "=== HISTORIAL DE ÚLTIMAS ATENCIONES DEL HOSPITAL ===\n";
+
+    while (original->isEmpty() != true) {
+        Paciente* p = original->top();
+        copia->push(p);
+        t += "Nombre: " + p->getNombre() + " | Edad: " + p->getEdad() + " | Departamento: " + p->getServicio() + "\n";
+        original->pop();
+    }
+
+    while (copia->isEmpty() != true) {
+        original->push(copia->top());
+        copia->pop();
+    }
+
+    delete copia;
+
+    return t;
+}
+
 //Destructor
 SistemaImplementado:: ~SistemaImplementado() {
     delete this->colaPacientes;

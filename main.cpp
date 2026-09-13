@@ -65,6 +65,11 @@ void opcion2() {
     p(S->informacionSector(departamento));
 }
 
+//Metodo para generar la entrega del historial desde el más nuevo al más antiguo
+void opcion3() {
+    p(S->informacionHistorial());
+}
+
 //El menú del hospital
 void menu() {
 
@@ -92,11 +97,11 @@ void menu() {
                 break;
 
             case 3:
-                p("3");
+                opcion3();
                 break;
 
             case 4:
-                p("4");
+                p("Hasta luego :D.");
                 break;
 
             default:
@@ -106,8 +111,6 @@ void menu() {
         }
 
     }
-
-    p("Hasta luego :D.");
 
 }
 

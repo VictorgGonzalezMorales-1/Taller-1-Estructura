@@ -37,6 +37,7 @@ public:
     std:: string entregarCola() override;
     string entregarDepartamentos() override;
     std:: string informacionSector(int pos) override;
+    std:: string informacionHistorial() override;
 
     ~SistemaImplementado() override; //Sistema Implementado
 
