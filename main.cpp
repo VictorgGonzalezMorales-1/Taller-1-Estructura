@@ -49,7 +49,7 @@ void opcion1() {
     p("Indique la cantidad de pacientes a atender:");
     int cant = 0;
     cin >> cant;
-    S->atencion(cant);
+    p(S->atencion(cant));
 }
 
 //El menú del hospital

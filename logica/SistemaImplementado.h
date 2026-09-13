@@ -32,7 +32,7 @@ public:
     Paciente* makePaciente(std:: string line) override;
     List<std:: string>* split(std:: string line, char separador) override;
     void makeHospital() override;
-    void atencion(int cant) override;
+    std:: string atencion(int cant) override;
     void toSector(Paciente* p) override;
     std:: string entregarCola() override;
 

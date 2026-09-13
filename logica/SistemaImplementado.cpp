@@ -58,7 +58,9 @@ void SistemaImplementado:: makeHospital() {
 }
 
 //Metodo para generar la atencion de pacientes
-void SistemaImplementado:: atencion(int cant) {
+string  SistemaImplementado:: atencion(int cant) {
+
+    string t = "=== ATENDIENDO PACIENTES ===\n";
 
     for (int a = 0; a < cant; a++) {
 
@@ -69,10 +71,16 @@ void SistemaImplementado:: atencion(int cant) {
         Paciente* p = this->colaPacientes->front();
         this->colaPacientes->pop();
         toSector(p);
+
+        t+= "ID: " + p->getId() + "\n";
+        t+= "Nombre: " + p->getNombre()+ "\n";
+        t+= "Servicio: " + p->getServicio() + "\n\n";
+        t+= "Paciente enviado a " + p->getServicio() +"\n\n";
+
         this->pilaPacientes->push(p);
 
     }
-
+    return t;
 }
 
 //Metodo para direccionar a cada paciente a su sector correspondiente
