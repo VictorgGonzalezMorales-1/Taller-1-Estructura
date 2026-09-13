@@ -125,6 +125,23 @@ string SistemaImplementado:: entregarDepartamentos() {
 
 }
 
+//Metodo para entregar los paciente dentro de un sector
+std:: string SistemaImplementado:: informacionSector(int pos) {
+    int index = pos - 1;
+
+    List<Paciente*>* c = this->hospital->get(index);
+    string t = "Pacientes en el departamento de " + sectores[index] + ": " + to_string(c->getSize()) + "\n";
+
+    Paciente* cP;
+
+    for (int a = 0; a < c->getSize(); a++) {
+        cP = c->get(a);
+        t += cP->getNombre() + "(" + cP->getEdad() + ")\n";
+    }
+
+    return t;
+}
+
 //Destructor
 SistemaImplementado:: ~SistemaImplementado() {
     delete this->colaPacientes;

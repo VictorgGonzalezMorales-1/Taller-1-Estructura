@@ -46,15 +46,23 @@ void read() {
 void opcion1() {
     p("=== PACIENTES EN ESPERA ===\n");
     p(S->entregarCola());
+
     p("Indique la cantidad de pacientes a atender:");
     int cant = 0;
     cin >> cant;
+
     p(S->atencion(cant));
 }
 
 //Metodo para generar la entrega de los departamentos
 void opcion2() {
     p(S->entregarDepartamentos());
+
+    int departamento = 0;
+    p("Seleccionar opción: ");
+    cin >> departamento;
+
+    p(S->informacionSector(departamento));
 }
 
 //El menú del hospital
