@@ -35,6 +35,7 @@ public:
     std:: string atencion(int cant) override;
     void toSector(Paciente* p) override;
     std:: string entregarCola() override;
+    string entregarDepartamentos() override;
 
     ~SistemaImplementado() override; //Sistema Implementado
 

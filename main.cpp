@@ -42,7 +42,7 @@ void read() {
 
 }
 
-// Metodo para generar la atencion a pacientes
+//Metodo para generar la atencion a pacientes
 void opcion1() {
     p("=== PACIENTES EN ESPERA ===\n");
     p(S->entregarCola());
@@ -50,6 +50,11 @@ void opcion1() {
     int cant = 0;
     cin >> cant;
     p(S->atencion(cant));
+}
+
+//Metodo para generar la entrega de los departamentos
+void opcion2() {
+    p(S->entregarDepartamentos());
 }
 
 //El menú del hospital
@@ -75,7 +80,7 @@ void menu() {
                 break;
 
             case 2:
-                p("2");
+                opcion2();
                 break;
 
             case 3:

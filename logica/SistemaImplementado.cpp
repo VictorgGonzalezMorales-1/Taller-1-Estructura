@@ -110,6 +110,21 @@ std:: string SistemaImplementado:: entregarCola() {
     return t;
 }
 
+//Metodo para entregar todos los departamentos en orden
+string SistemaImplementado:: entregarDepartamentos() {
+
+    string t = "=== DEPARTAMENTOS/SERVICIOS ===\n";
+    int count = 1;
+
+    for (string s: sectores) {
+        t += to_string(count)  + ". " + s + "\n";
+        count++;
+    }
+
+    return t;
+
+}
+
 //Destructor
 SistemaImplementado:: ~SistemaImplementado() {
     delete this->colaPacientes;

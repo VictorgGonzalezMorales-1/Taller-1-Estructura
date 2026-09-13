@@ -15,6 +15,7 @@ public:
     virtual std:: string atencion(int cant) = 0;
     virtual void toSector(Paciente* p) = 0;
     virtual std:: string entregarCola() = 0;
+    virtual std:: string entregarDepartamentos() = 0;
 
     //Destructor Virtual
     virtual ~Sistema() = default;
