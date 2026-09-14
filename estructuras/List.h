@@ -85,7 +85,6 @@ public:
         if (index < 0) throw 0;
         if (index == 0) {
             this->insertFirst(value);
-            size++;
             return;
         }
         if (start == nullptr) throw 0;
@@ -110,7 +109,7 @@ public:
     }
 
     void remove(int index) {
-        if (index < 0) throw 0;
+        if (index < 0 || start == nullptr) throw 0;
         if (index == 0) {
             Node<T>* toDelete = this->start;
             this->start = start->getNext();

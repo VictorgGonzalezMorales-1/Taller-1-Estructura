@@ -87,8 +87,11 @@ string  SistemaImplementado:: atencion(int cant) {
 void SistemaImplementado:: toSector(Paciente* p) {
     int index = 0;
 
-    for (std:: string s : this->sectores) {
-        if (s == p->getServicio()) {
+    string* first = this->sectores;
+    string* last = this->sectores + 8;
+
+    for (string* puntero = first; puntero < last; puntero++) {
+        if (*puntero == p->getServicio()) {
             this->hospital->get(index)->insertLast(p);
         }
         index++;
@@ -100,7 +103,9 @@ std:: string SistemaImplementado:: entregarCola() {
 
     string t = "";
 
-    for (int a = 1; a < this->colaPacientes->size() + 1 ; a++) {
+    int nPacinetes = this->colaPacientes->size();
+
+    for (int a = 1; a < nPacinetes + 1 ; a++) {
         Paciente* p = this->colaPacientes->front();
         t += to_string(a) + ". " + p->getId() + " - " + p->getNombre() + "\n" ;
         this->colaPacientes->pop();
@@ -116,8 +121,11 @@ string SistemaImplementado:: entregarDepartamentos() {
     string t = "=== DEPARTAMENTOS/SERVICIOS ===\n";
     int count = 1;
 
-    for (string s: sectores) {
-        t += to_string(count)  + ". " + s + "\n";
+    string* first = this->sectores;
+    string* last = this->sectores + 8;
+
+    for (string* puntero = first; puntero < last; puntero++) {
+        t += to_string(count)  + ". " + *puntero + "\n";
         count++;
     }
 
@@ -128,9 +136,10 @@ string SistemaImplementado:: entregarDepartamentos() {
 //Metodo para entregar los paciente dentro de un sector
 std:: string SistemaImplementado:: informacionSector(int pos) {
     int index = pos - 1;
+    string* sector = this->sectores;
 
     List<Paciente*>* c = this->hospital->get(index);
-    string t = "Pacientes en el departamento de " + sectores[index] + ": " + to_string(c->getSize()) + "\n";
+    string t = "Pacientes en el departamento de " + *(sector + index) + ": " + to_string(c->getSize()) + "\n";
 
     Paciente* cP;
 
@@ -167,14 +176,25 @@ string SistemaImplementado:: informacionHistorial() {
 
 //Destructor
 SistemaImplementado:: ~SistemaImplementado() {
+
+    //Eliminar los pacientes que estén en la cola y la cola al final
+    while (colaPacientes->isEmpty() != true) {
+        delete colaPacientes->front();
+        colaPacientes->pop();
+    }
     delete this->colaPacientes;
+
+    //Eliminar los pacientes que estén en la pila y la pila al final
+    while (pilaPacientes->isEmpty() != true) {
+        delete this->pilaPacientes->top();
+        this->pilaPacientes->pop();
+    }
     delete this->pilaPacientes;
 
     for (int a = 0; a < this->hospital->getSize(); a++) {
-        List<Paciente*>* sector = hospital->get(a);
-        delete sector;
+        List<Paciente*>* sectorDelete = hospital->get(a);
+        delete sectorDelete;
     }
-
     delete hospital;
 
 }
