@@ -81,10 +81,58 @@ ID;Nombre;Edad;Servicio
 * Que no se repita el ID de un paciente.
 
 ## Requisitos
-[En proceso]
+* Tener un compilador de C++ instalado.\
+  (como g++ mediante MinGW en Windows) compatible con el estándar C++17.
 
-## Instrucciones de Compilación
-[En proceso]
+## Instrucciones de Compilación (Windows)
+
+### Paso 1: Descargar el proyecto desde GitHub
+
+1. Entra al repositorio de **GitHub** del proyecto.
+2. Haz clic en el botón verde **Code**.
+3. Selecciona la opción **Download ZIP**.
+4. El archivo comprimido se guardará en tu carpeta de **Descargas** con el nombre:\
+ `Taller-1-Estructura-main.zip`.
+
+### Paso 2: Extraer el archivo .zip
+
+1. Ve a tu carpeta de **Descargas** en el Explorador de Archivos de Windows.
+2. Haz clic derecho sobre `Taller-1-Estructura-main.zip` y selecciona **Extraer todo...**.
+3. Deja la ruta por defecto `(Descargas)` y haz clic en **Extraer**.\
+(Esto creará la estructura de carpetas necesaria para los siguientes pasos).
+
+### Paso 3: Abrir la Consola y Navegar al Código Fuente
+
+1. Abre el menú de inicio de Windows, escribe **cmd** (Símbolo del sistema) y ábrelo.
+
+2. Copia y pega el siguiente comando para ingresar a la carpeta del proyecto que acabas de extraer:
+``
+cd Downloads\Taller-1-Estructura-main\Taller-1-Estructura-main
+``
+3. **(Opcional)** Si quieres verificar que estás en el lugar correcto, escribe ``dir`` y luego presiona Enter. Deberías ver en la lista el archivo ``main.cpp``, ``Pacientes.txt`` y las carpetas ``dominio``, ``logica`` y ``estructuras``.
+
+### Paso 4: Crear el Entorno de Compilación (``build``)
+
+Para respetar la ruta del archivo de texto sin modificar el código fuente, creamos la carpeta de ejecución con estos comandos:
+
+**(Por cada uno escríbelo y presiona Enter)**
+
+1. ``mkdir build``
+2. ``cd build``
+
+
+### Paso 5: Compilar el Proyecto con ``g++``
+
+Como ahora nos encontramos dentro de la carpeta ``build``, ejecutamos el compilador apuntando hacia los archivos del nivel superior (``..\``) usando el estándar C++17:
+
+```text
+g++ -std=c++17 ..\main.cpp ..\dominio\Paciente.cpp ..\logica\SistemaImplementado.cpp -o programa.exe
+```
+
+### Paso 6: Ejecutar el Programa "Hospital Marmaja"
+
+Una vez finalizada la compilación sin errores, arranca la aplicación escribiendo: ``programa.exe``
+
 
 ## Ejecución
 [En proceso]
