@@ -134,8 +134,57 @@ g++ -std=c++17 ..\main.cpp ..\dominio\Paciente.cpp ..\logica\SistemaImplementado
 Una vez finalizada la compilación sin errores, arranca la aplicación escribiendo: ``programa.exe``
 
 
-## Ejecución
-[En proceso]
+## Ejecución y Flujo del Sistema
+
+Al iniciar el programa (``programa.exe``), el sistema ejecuta de forma automática el flujo inicial de carga, dejando el procesamiento y derivación bajo el control directo del usuario a través del menú:
+
+```text
+[Archivo de Texto] --> [Cola de Espera (Queue)] --(Acción del Usuario)--> [Derivación (Lists)] + [Historial (Stack)]
+```
+
+### 1. Robustez y Validación en la Carga de Datos
+Antes de desplegar la interfaz, el sistema analiza el archivo `Pacientes.txt` bajo las siguientes reglas de control de errores:
+* **Validación de campos:** Rechaza líneas que no contengan los 4 datos obligatorios separados por punto y coma (`;`).
+
+* **Control de existencia:** Verifica que el departamento asignado corresponda a uno de los 8 servicios oficiales.
+
+* **Pacientes duplicados:** Comprueba los IDs registrados para evitar cargar pacientes con un ID repetido.
+
+* **Estructura inicial:** Los pacientes que superan las validaciones son almacenados **únicamente en la Cola Dinámica de Espera (`Queue`)**, manteniendo el orden de llegada mediante el principio **FIFO**. Ningún paciente ingresa directamente a un servicio médico al iniciar, eso es responsabilidad del usuario.
+
+
+### 2. Menú de Interacción y Flujos de Control
+
+Una vez rellenada la cola de espera, se habilita el menú principal. El usuario es el encargado de dictar las instrucciones para procesar y derivar a los pacientes, solicitándose parámetros adicionales según la opción elegida:
+
+```text
+=== HOSPITAL MARMAJA ===
+
+1. Atender pacientes
+2. Ver departamento
+3. Revisar historial de atencion
+4. Salir
+Seleccionar opcion:
+```
+
+#### Opciones y Parámetros Solicitados:
+
+* **Opción 1: Atender pacientes (Instrucción de Derivación):**
+  * **Datos solicitados:** Muestra en pantalla el listado de personas que esperan en la cola y solicita ingresar la **cantidad de pacientes a atender**.
+
+  * **Operación:** El programa remueve secuencialmente de la `Queue` el número de pacientes indicado. En ese instante, los deriva hacia la **Lista Enlazada de Pacientes** de su respectivo servicio médico y registra la atención en el historial.
+
+* **Opción 2: Ver departamento (Listas Enlazadas de Servicios):**
+  * **Datos solicitados:** Despliega la lista de los 8 servicios habilitados y solicita ingresar el **índice numérico del departamento** (del 1 al 8) que se desea inspeccionar.
+
+  * **Operación:** Obtiene el servicio seleccionado y muestra los pacientes que ya han sido derivados allí mediante la opción 1.
+
+* **Opción 3: Revisar historial de atención (Flujo LIFO):**
+  * **Operación:** Muestra de forma directa la estructura de la **Pila (`Stack`)**, mostrando primero al paciente atendido más recientemente y luego los anteriores, respetando el principio **LIFO**.
+
+* **Opción 4: Salir (Liberación de Memoria Dinámica):**
+  * **Operación:** Finaliza la ejecución y libera la memoria dinámica utilizada por las estructuras, los pacientes y el Sistema Implementado.
+
 
 ## Servicios disponibles
 
