@@ -101,6 +101,11 @@ string  SistemaImplementado:: atencion(int cant) {
     return t;
 }
 
+//Metodo para entregar la cantidad de pacientes en la cola
+int SistemaImplementado:: sizeCola() {
+    return this->colaPacientes->size();
+}
+
 //Metodo para direccionar a cada paciente a su sector correspondiente
 void SistemaImplementado:: toSector(Paciente* p) {
     int index = 0;
@@ -111,6 +116,7 @@ void SistemaImplementado:: toSector(Paciente* p) {
     for (string* puntero = first; puntero < last; puntero++) {
         if (*puntero == p->getServicio()) {
             this->hospital->get(index)->insertLast(p);
+            break;
         }
         index++;
     }

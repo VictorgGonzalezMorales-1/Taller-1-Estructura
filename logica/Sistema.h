@@ -14,6 +14,7 @@ public:
     virtual bool existS(std:: string sector) = 0;
     virtual void makeHospital() = 0;
     virtual std:: string atencion(int cant) = 0;
+    virtual int sizeCola() = 0;
     virtual void toSector(Paciente* p) = 0;
     virtual std:: string entregarCola() = 0;
     virtual std:: string entregarDepartamentos() = 0;

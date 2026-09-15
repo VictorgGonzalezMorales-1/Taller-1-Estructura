@@ -10,7 +10,6 @@
 
 #include "logica/Sistema.h"
 #include "logica/SistemaImplementado.h"
-#include "estructuras/List.h"
 
 using namespace std;
 
@@ -21,7 +20,7 @@ void p(string t) {
     cout << t << endl;
 }
 
-//Metodo para leer el archivo y procesar a los Pacientes
+//Metodo para leer el archivo y procesar a los Pacientes **
 bool read() {
 
     ifstream archivo("../Pacientes.txt"); //Cargar Archivo
@@ -62,7 +61,7 @@ bool read() {
             }
 
             }
-            
+
         }
 
         delete datos;
@@ -82,21 +81,52 @@ void opcion1() {
     p(S->entregarCola());
 
     p("Indique la cantidad de pacientes a atender:");
+    string respuesta;
     int cant = 0;
-    cin >> cant;
+    cin >> respuesta;
 
-    p(S->atencion(cant));
+    try{
+        cant = stoi(respuesta);
+        if (cant <= 0) {
+            p("Entrada inválida: Ingrese un número mayor a 0");
+        }else if (cant > S->sizeCola()){
+            p("Solo hay " + to_string(S->sizeCola()) + " en la cola");
+        }else {
+            p(S->atencion(cant));
+        }
+
+    }catch (...) {
+        p("Entrada inválida: Ingrese un número");
+    }
 }
 
-//Metodo para generar la entrega de los departamentos
+//Metodo para generar la entrega de los departamentos **
 void opcion2() {
     p(S->entregarDepartamentos());
 
+    string respuesta;
     int departamento = 0;
     p("Seleccionar opción: ");
-    cin >> departamento;
 
-    p(S->informacionSector(departamento));
+    cin >> respuesta;
+
+    try {
+
+        departamento = stoi(respuesta);
+
+        if (departamento <= 0) {
+            p("Entrada inválida: Ingrese un número mayor a 0");
+        }
+        else if (departamento > 8) {
+            p("Entrada inválida: Ingrese un número entre 1 y 8");
+        }
+        else {
+            p(S->informacionSector(departamento));
+        }
+
+    }catch (...) {
+        p("Entrada inválida: Ingrese un número válido ");
+    }
 }
 
 //Metodo para generar la entrega del historial desde el más nuevo al más antiguo
@@ -107,9 +137,9 @@ void opcion3() {
 //El menú del hospital
 void menu() {
 
-    int opcion = 0;
+    string opcion = "";
 
-    while (opcion != 4) {
+    while (opcion != "4") {
 
         p("=== HOSPITAL MARMAJA ===\n");
         p("1. Atender pacientes");
@@ -120,28 +150,20 @@ void menu() {
         cout << "Seleccionar opcion:";
         cin >> opcion;
 
-        switch (opcion) {
-
-            case 1:
-                opcion1();
-                break;
-
-            case 2:
-                opcion2();
-                break;
-
-            case 3:
-                opcion3();
-                break;
-
-            case 4:
-                p("Hasta luego :D.");
-                break;
-
-            default:
-                p("Opcion invalida, ingrese otra");
-                break;
-
+        if (opcion == "1") {
+            opcion1();
+        }
+        else if (opcion == "2") {
+            opcion2();
+        }
+        else if (opcion == "3") {
+            opcion3();
+        }
+        else if (opcion == "4") {
+            p("Hasta luego :D.");
+        }
+        else {
+            p("Opcion invalida, ingrese otra");
         }
 
     }

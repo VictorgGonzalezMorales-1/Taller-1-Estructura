@@ -34,6 +34,7 @@ public:
     bool existS(std:: string sector) override;
     void makeHospital() override;
     std:: string atencion(int cant) override;
+    int sizeCola() override;
     void toSector(Paciente* p) override;
     std:: string entregarCola() override;
     string entregarDepartamentos() override;
