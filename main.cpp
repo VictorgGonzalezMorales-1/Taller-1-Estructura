@@ -10,6 +10,7 @@
 
 #include "logica/Sistema.h"
 #include "logica/SistemaImplementado.h"
+#include "estructuras/List.h"
 
 using namespace std;
 
@@ -21,24 +22,57 @@ void p(string t) {
 }
 
 //Metodo para leer el archivo y procesar a los Pacientes
-void read() {
+bool read() {
 
     ifstream archivo("../Pacientes.txt"); //Cargar Archivo
 
     //Revisar que esté
     if (!archivo.is_open()) {
         cout << "No se pude abrir el archivo" << endl;
-        return;
+        return false;
     }
 
     string line; //String para guardar el contenido
+    List<string>* ids = new List<string>();
 
     //Bucle para leer la línea
     while (getline(archivo,line)) {
-        S->makePaciente(line);
+        List<string>* datos = S->split(line, ';');
+
+        if (datos->getSize() == 4) {
+
+            string sector = datos->get(3);
+
+            if (S->existS(sector) == true) {
+
+                string idActual = datos->get(0);
+            bool duplicado = false;
+
+            int large = ids->getSize();
+            for (int a = 0; a < large; a++) {
+                if (ids->get(a) == idActual) {
+                    duplicado = true;
+                    break;
+                }
+            }
+
+            if (duplicado == false) {
+                ids->insertLast(idActual);
+                S->makePaciente(line);
+            }
+
+            }
+            
+        }
+
+        delete datos;
+
     }
 
     archivo.close(); //Cerrar el Archivo
+    delete ids;
+
+    return true;
 
 }
 
@@ -115,7 +149,10 @@ void menu() {
 }
 
 int main() {
-    read();
-    menu();
+
+    if (read() == true) {
+        menu();
+    }
+
     return 0;
 }

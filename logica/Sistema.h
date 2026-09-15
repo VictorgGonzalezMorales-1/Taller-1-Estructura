@@ -11,6 +11,7 @@ public:
     //Metodo para crear a los pacientes
     virtual Paciente* makePaciente(std::string line) = 0;
     virtual List<std:: string>* split(std::string line, char separador) = 0;
+    virtual bool existS(std:: string sector) = 0;
     virtual void makeHospital() = 0;
     virtual std:: string atencion(int cant) = 0;
     virtual void toSector(Paciente* p) = 0;

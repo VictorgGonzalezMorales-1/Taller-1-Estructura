@@ -45,6 +45,24 @@ List<std:: string>*  SistemaImplementado:: split(std:: string line, char separad
 
 }
 
+//Metodo para revisar que el sector exista
+bool SistemaImplementado:: existS(std:: string sector) {
+
+    string* first = this->sectores;
+    string* last = this->sectores + 8;
+
+    for (string* puntero = first; puntero < last; puntero++) {
+
+        if (*puntero == sector) {
+            return true;
+        }
+
+    }
+
+    return false;
+
+}
+
 //Metodo que genera el hospital con sus sectores en orden dentro de una lista
 void SistemaImplementado:: makeHospital() {
     int count = 0;
@@ -103,9 +121,9 @@ std:: string SistemaImplementado:: entregarCola() {
 
     string t = "";
 
-    int nPacinetes = this->colaPacientes->size();
+    int nPacientes = this->colaPacientes->size();
 
-    for (int a = 1; a < nPacinetes + 1 ; a++) {
+    for (int a = 1; a < nPacientes + 1 ; a++) {
         Paciente* p = this->colaPacientes->front();
         t += to_string(a) + ". " + p->getId() + " - " + p->getNombre() + "\n" ;
         this->colaPacientes->pop();

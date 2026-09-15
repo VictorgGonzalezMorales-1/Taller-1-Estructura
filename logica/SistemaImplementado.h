@@ -31,6 +31,7 @@ public:
     //Metodos
     Paciente* makePaciente(std:: string line) override;
     List<std:: string>* split(std:: string line, char separador) override;
+    bool existS(std:: string sector) override;
     void makeHospital() override;
     std:: string atencion(int cant) override;
     void toSector(Paciente* p) override;
