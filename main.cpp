@@ -10,6 +10,7 @@
 
 #include "logica/Sistema.h"
 #include "logica/SistemaImplementado.h"
+#include "estructuras/List.h"
 
 using namespace std;
 
@@ -40,25 +41,41 @@ bool read() {
 
         if (datos->getSize() == 4) {
 
-            string sector = datos->get(3);
+            if (datos->get(0) != "" && datos->get(1) != "" && datos->get(2) != ""
+                && datos->get(3) != "") {
 
-            if (S->existS(sector) == true) {
+                string sector = datos->get(3);
 
-                string idActual = datos->get(0);
-            bool duplicado = false;
+                if (S->existS(sector) == true) {
 
-            int large = ids->getSize();
-            for (int a = 0; a < large; a++) {
-                if (ids->get(a) == idActual) {
-                    duplicado = true;
-                    break;
+                    string idActual = datos->get(0);
+                    bool duplicado = false;
+
+                    int large = ids->getSize();
+                    for (int a = 0; a < large; a++) {
+                        if (ids->get(a) == idActual) {
+                            duplicado = true;
+                            break;
+                        }
+                    }
+
+                    if (duplicado == false) {
+                        ids->insertLast(idActual);
+
+                        try {
+
+                            int edad = stoi(datos->get(2));
+
+                            if (edad > 0) {
+                                S->makePaciente(line);
+                            }
+
+                        }catch (...) {
+                        }
+
+                    }
+
                 }
-            }
-
-            if (duplicado == false) {
-                ids->insertLast(idActual);
-                S->makePaciente(line);
-            }
 
             }
 
@@ -77,7 +94,7 @@ bool read() {
 
 //Metodo para generar la atencion a pacientes
 void opcion1() {
-    p("=== PACIENTES EN ESPERA ===\n");
+    p("=== PACIENTES EN ESPERA ===");
     p(S->entregarCola());
 
     p("Indique la cantidad de pacientes a atender:");
@@ -88,7 +105,7 @@ void opcion1() {
     try{
         cant = stoi(respuesta);
         if (cant <= 0) {
-            p("Entrada inválida: Ingrese un número mayor a 0");
+            p("Entrada invalida: Ingrese un numero mayor a 0");
         }else if (cant > S->sizeCola()){
             p("Solo hay " + to_string(S->sizeCola()) + " en la cola");
         }else {
@@ -96,7 +113,7 @@ void opcion1() {
         }
 
     }catch (...) {
-        p("Entrada inválida: Ingrese un número");
+        p("Entrada invalida: Ingrese un número");
     }
 }
 
@@ -106,7 +123,7 @@ void opcion2() {
 
     string respuesta;
     int departamento = 0;
-    p("Seleccionar opción: ");
+    p("Seleccionar opcion: ");
 
     cin >> respuesta;
 
@@ -115,17 +132,17 @@ void opcion2() {
         departamento = stoi(respuesta);
 
         if (departamento <= 0) {
-            p("Entrada inválida: Ingrese un número mayor a 0");
+            p("Entrada invalida: Ingrese un numero mayor a 0");
         }
         else if (departamento > 8) {
-            p("Entrada inválida: Ingrese un número entre 1 y 8");
+            p("Entrada invalida: Ingrese un numero entre 1 y 8");
         }
         else {
             p(S->informacionSector(departamento));
         }
 
     }catch (...) {
-        p("Entrada inválida: Ingrese un número válido ");
+        p("Entrada invalida: Ingrese un numero valido ");
     }
 }
 
@@ -141,7 +158,7 @@ void menu() {
 
     while (opcion != "4") {
 
-        p("=== HOSPITAL MARMAJA ===\n");
+        p("=== HOSPITAL MARMAJA ===");
         p("1. Atender pacientes");
         p("2. Ver departamento");
         p("3. Revisar historial de atencion");
@@ -176,5 +193,6 @@ int main() {
         menu();
     }
 
+    delete S;
     return 0;
 }
