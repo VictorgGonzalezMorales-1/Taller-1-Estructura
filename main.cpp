@@ -60,14 +60,14 @@ bool read() {
                     }
 
                     if (duplicado == false) {
-                        ids->insertLast(idActual);
-
+                        
                         try {
 
                             int edad = stoi(datos->get(2));
 
                             if (edad > 0) {
                                 S->makePaciente(line);
+                                ids->insertLast(idActual);
                             }
 
                         }catch (...) {
