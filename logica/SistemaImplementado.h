@@ -40,6 +40,7 @@ public:
     string entregarDepartamentos() override;
     std:: string informacionSector(int pos) override;
     std:: string informacionHistorial() override;
+    std:: string buscarPorID(std:: string idBuscado) override;
 
     ~SistemaImplementado() override; //Sistema Implementado
 

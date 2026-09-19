@@ -20,6 +20,7 @@ public:
     virtual std:: string entregarDepartamentos() = 0;
     virtual std:: string informacionSector(int pos) = 0;
     virtual std:: string informacionHistorial() = 0;
+    virtual std:: string buscarPorID(std:: string idBuscado) = 0;
 
     //Destructor Virtual
     virtual ~Sistema() = default;

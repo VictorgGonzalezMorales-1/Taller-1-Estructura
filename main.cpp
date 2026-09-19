@@ -193,6 +193,20 @@ int main() {
         menu();
     }
 
+    /*
+    //Acá está el metodo buscar y agregar, lo solicitaban en los requerimientos
+    //del taller, pero no estaba en el ejemplo de ejecución
+
+    cin.get();
+
+    p("\nBuscar por ID");
+    p("Ingrese una ID para buscar:");
+
+    string buscar;
+    cin >> buscar;
+    p(S->buscarPorID(buscar));
+
+    */
     delete S;
     return 0;
 }

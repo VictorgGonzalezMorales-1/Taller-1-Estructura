@@ -198,6 +198,58 @@ string SistemaImplementado:: informacionHistorial() {
     return t;
 }
 
+//Metodo para entregar el paciente en base al id entregado
+string SistemaImplementado:: buscarPorID(std:: string idBuscado) {
+
+    //Buscar en la cola de espera
+    int tamañoCola = colaPacientes->size();
+    string respuesta = "";
+    bool encontrado = false;
+
+    for (int a = 0; a < tamañoCola; a++) {
+
+        Paciente* p = colaPacientes->front();
+        colaPacientes->pop();
+
+        if (p->getId() == idBuscado) {
+
+            encontrado = true;
+            respuesta =  "Paciente encontrado la cola de espera \n Nombre: " + p->getNombre() + " / Edad: " +
+                    p->getEdad() + " / Servicio: " + p->getServicio();
+
+        }
+
+        colaPacientes->push(p);
+
+    }
+    
+    if (encontrado == true)
+        return respuesta;
+
+    //Buscar en los servicios del hospital
+    int tamañoHospital = this->hospital->getSize();
+
+    for (int a = 0; a < tamañoHospital; a++) {
+        List<Paciente*>* sector = hospital->get(a);
+        int tamañoSector = sector->getSize();
+
+        for (int b = 0; b < tamañoSector; b++) {
+
+            Paciente* p = sector->get(b);
+
+            if (p->getId() == idBuscado) {
+
+                return "Paciente encontrado en atención \n Nombre: " + p->getNombre() + " / Edad: " +
+                    p->getEdad() + " / Servicio: " + p->getServicio();
+
+            }
+
+        }
+
+    }
+    return "El paciente no se encuentra en el sistema";
+}
+
 //Destructor
 SistemaImplementado:: ~SistemaImplementado() {
 
